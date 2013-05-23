@@ -1,0 +1,1 @@
+A quick python practice project: recreating Conway's Game of Life in the terminal.  Simple commands are available to set cells, update, and show the board with coordinates.  
