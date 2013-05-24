@@ -1,8 +1,5 @@
 """
-Class that
-defines board that will be used used for
-the Game of Life. 
-
+Class that defines board that will be used used for the Game of Life. 
 Includes all methods to update, show, and change state of board.
 """
 
@@ -10,12 +7,13 @@ import sys
 import copy
 
 class board(object):
-    """
-    Constructor for the board.  Takes a simple parameter: size.
-    Size determines the size of the board.  Board will be a square of this size
-    """
     def __init__(self, size):
+        """
+        Constructor for the board.  Takes a simple parameter: size.
+        Size determines the size of the board.  Board will be a square of this size
+        """
         self.size = size
+        # b is main 2D array attribute
         self.b = []
         for i in range(0, size):
             self.b.append([])
@@ -50,7 +48,7 @@ class board(object):
       for y in range(0, self.size):
           if y < 10:
               sys.stdout.write(str(y) + " ")
-          elif y >=10:
+          elif y >= 10:
               sys.stdout.write(str(y))
 
           for x in range(0, self.size):
@@ -77,6 +75,7 @@ class board(object):
       Invoked with 'update' or simple by pressing enter when update mode is on.
       Rules adjustable by adjusting constants below, makes for some fun.
       """
+
       # TODO: add methods to adjust the ruleset ingame
       OVERPOP = 3
       UNDERPOP = 2
@@ -99,7 +98,7 @@ class board(object):
       Gets living neighbors for a particular cell (ie: cells with value '#').
       """
 
-      # There maybe a simpler way to implement this, it turned out this way
+      # There may be a simpler way to implement this, it turned out this way
       # was easier than adding a padding of invisible empty cells around the board
       live = 0
 

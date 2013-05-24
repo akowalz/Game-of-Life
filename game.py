@@ -9,8 +9,9 @@ import board as b
 import sys
 
 class game(object):
-    """ Constructor for the game class.  Makes a simple game with a board """
     def __init__(self):
+        """ Constructor for the game class.  Makes a simple game with a board """
+        
         # Is putting more than assignments in the constructor bad practice?
         # I couldn't think of better way to do it...
         self.game_size = input("What size would you like to play? >> ")
