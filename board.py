@@ -85,13 +85,13 @@ class board(object):
         for y in range(0, self.size):
             for x in range(0, self.size):
                 living = self.living_neighbors(x,y)
-                    if self.b[x][y] == '.' and living == SURVIVAL:
-                        buf[x][y] = '#' 
+                if self.b[x][y] == '.' and living == SURVIVAL:
+                    buf[x][y] = '#' 
 
-                    elif self.b[x][y] == '#':
-                        if living > OVERPOP or living < UNDERPOP:
-                            buf[x][y] = '.'
-            self.b = buf
+                elif self.b[x][y] == '#':
+                    if living > OVERPOP or living < UNDERPOP:
+                        buf[x][y] = '.'
+        self.b = buf
 
     def living_neighbors(self, x, y):
         """
