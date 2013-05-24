@@ -11,7 +11,7 @@ import sys
 class game(object):
     def __init__(self):
         """ Constructor for the game class.  Makes a simple game with a board """
-        
+
         # Is putting more than assignments in the constructor bad practice?
         # I couldn't think of better way to do it...
         self.game_size = input("What size would you like to play? >> ")
@@ -30,13 +30,10 @@ class game(object):
             std_show = True
             action = raw_input("> ")
 
-            # TODO: Change this to a switch statement, probably easier
-
-
             if "set" in action:
                 a = action.split()
                 self.board.set(int(a[1]), int(a[2]))
-            if "unset" in action:
+            elif "unset" in action:
                 a = action.split()
                 self.board.unset(int(a[1]), int(a[2]))
 
@@ -45,10 +42,12 @@ class game(object):
             elif action == "coordinates":
                 self.board.show_with_coords()
                 std_show = False
+
             elif action == "update mode on":
                 update_mode = True
             elif action == "update mode off":
                 update_mode = False
+                
             elif action == "quit":
                 sys.exit("Thanks for playing!")
 
