@@ -5,8 +5,11 @@ Includes all methods to update, show, and change state of board.
 
 import sys
 import copy
+DEAD = 0
+LIVE = 1
 
 class board(object):
+
     def __init__(self, size):
         """
         Constructor for the board.  Takes a simple parameter: size.
@@ -19,7 +22,7 @@ class board(object):
             self.b.append([])
         for y in range(0, size):
           for x in range(0, size):
-            self.b[x].append('.')
+            self.b[x].append(DEAD)
 
     def show(self):
         """
@@ -28,7 +31,10 @@ class board(object):
         """
         for y in range(0, self.size):
             for x in range(0, self.size):
-                sys.stdout.write(self.b[x][y] + ' ')
+                if self.b[x][y]:
+                    sys.stdout.write('#' + ' ')
+                elif not self.b[x][y]:
+                    sys.stdout.write('.' + ' ')
             sys.stdout.write('\n')
 
     def show_with_coords(self):
@@ -52,13 +58,16 @@ class board(object):
                 sys.stdout.write(str(y))
 
             for x in range(0, self.size):
-                sys.stdout.write(self.b[x][y] + ' ')
+                if self.b[x][y]:
+                    sys.stdout.write('#' + ' ')
+                elif not self.b[x][y]:
+                    sys.stdout.write('.' + ' ')
             sys.stdout.write('\n')
 
     def set(self, x, y):
         """ Set a space on the board.  Invoked with 'set' ingame """
         try:
-            self.b[x][y] = '#'
+            self.b[x][y] = LIVE
         except:
             print "Not a valid set command"
 
@@ -85,69 +94,69 @@ class board(object):
         for y in range(0, self.size):
             for x in range(0, self.size):
                 living = self.living_neighbors(x,y)
-                if self.b[x][y] == '.' and living == SURVIVAL:
-                    buf[x][y] = '#' 
+                if self.b[x][y] == DEAD and living == SURVIVAL:
+                    buf[x][y] = LIVE 
 
-                elif self.b[x][y] == '#':
+                elif self.b[x][y] == LIVE:
                     if living > OVERPOP or living < UNDERPOP:
-                        buf[x][y] = '.'
+                        buf[x][y] = DEAD
         self.b = buf
 
     def living_neighbors(self, x, y):
         """
-        Gets living neighbors for a particular cell (ie: cells with value '#').
+        Gets living neighbors for a particular cell (ie: cells with value LIVE).
         """
 
         # There may be a simpler way to implement this, it turned out this way
         # was easier than adding a padding of invisible empty cells around the board
-        live = 0
+        living = 0
 
         try:
-          if self.b[x+1][y] == '#':
-              live += 1
+          if self.b[x+1][y] == LIVE:
+              living += 1
         except: 
           pass
 
         try:
-          if self.b[x][y+1] == '#':
-              live += 1
+          if self.b[x][y+1] == LIVE:
+              living += 1
         except: 
           pass
 
         try:
-          if self.b[x+1][y+1] == '#':
-              live += 1
+          if self.b[x+1][y+1] == LIVE:
+              living += 1
         except: 
           pass
 
         try:
-          if self.b[x-1][y] == '#':
-              live += 1
+          if self.b[x-1][y] == LIVE:
+              living += 1
         except: 
           pass
 
         try:
-          if self.b[x][y-1] == '#':
-              live += 1
+          if self.b[x][y-1] == LIVE:
+              living += 1
         except: 
           pass
 
         try:
-          if self.b[x-1][y-1] == '#':
-              live += 1
+          if self.b[x-1][y-1] == LIVE:
+              living += 1
         except: 
           pass
 
         try:
-          if self.b[x-1][y+1] == '#':
-              live += 1
+          if self.b[x-1][y+1] == LIVE:
+              living += 1
         except: 
           pass
 
         try:
-          if self.b[x+1][y-1] == '#':
-              live += 1
+          if self.b[x+1][y-1] == LIVE:
+              living += 1
         except: 
           pass
 
-        return live
+        return living
